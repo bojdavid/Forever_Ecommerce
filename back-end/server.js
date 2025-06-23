@@ -3,6 +3,8 @@ const mongoose = require('mongoose')
 const cookieParser = require("cookie-parser")
 const cors = require("cors")
 
+const authRouter = require('./routes/auth/auth-routes')
+
 mongoose.connect("mongodb://localhost:27017/").then(() => console.log("MongoDB connected")).catch((error) => console.log(error)) 
 
 const app = express()
@@ -19,5 +21,6 @@ app.use(
 
 app.use(cookieParser())
 app.use(express.json())
+app.use('/api/auth', authRouter)
 
 app.listen(PORT, () => console.log(`Server is running on port -  ${PORT}`))
