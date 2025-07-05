@@ -7,7 +7,7 @@ function AdminLayout() {
   const [openSidebar, setOpenSidebar] = useState(false);
 
   return (
-    <div className="flex min-h-screen w-full">
+    <div className="flex min-h-screen min-w-[300px] w-full max-w-[1200px] mx-auto">
       {/* admin sidebar */}
       <AdminSideBar open={openSidebar} setOpen={setOpenSidebar} />
       <div className="flex flex-1 flex-col">

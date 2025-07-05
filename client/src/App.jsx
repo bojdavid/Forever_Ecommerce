@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import { Button } from './components/ui/button'
 import { Route, Routes } from 'react-router-dom'
@@ -19,14 +19,22 @@ import ShoppingAccount from './pages/shopping-view/account'
 import ShoppingCheckout from './pages/shopping-view/checkout'
 import CheckAuth from './components/common/checkAuth'
 import UnAuthPage from './pages/un-auth'
+import { useDispatch, useSelector } from 'react-redux'
+import { checkAuth } from './store/auth-slice'
+import { Skeleton } from './components/ui/skeleton'
 
 
 
 function App() {
-  const isAuthenticated = false;
-  const user = {
-    name:"BOJ",
-    role:"user"
+  const {user, isAuthenticated, isLoading} = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() =>{
+      dispatch(checkAuth())
+  },[dispatch])
+
+  if (isLoading){
+    return <div> <Skeleton className="w-[800] bg-black h-[600]" /> </div>
   }
 
   return (
